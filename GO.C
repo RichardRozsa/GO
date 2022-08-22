@@ -3,6 +3,11 @@
 //
 // Modification LOG:
 //
+// v3.4 01/25/94 - Richard Rozsa
+//      Fixed bug in GetQuotedString() where (char *) variable was used
+//      instead of (int) to calculate length of strncpy().
+//      This fix allows dos variables to be referrenced by aliases.
+//
 // v3.3 09/28/92 - Richard Rozsa
 //      Added /m parameter: make any directory that's not found.
 //      Fixed bug that prevented a go to an <alias> value.
@@ -79,7 +84,7 @@ int     quietMode = !OK;
 // --------------------------------------------------------------
 void Help( void )
     {
-    printf( "GO Directory Navagation Utility  Version 3.3  Copyright (c) 1989-1992\n" );
+    printf( "GO Directory Navagation Utility  Version 3.4  Copyright (c) 1989-1994\n" );
     printf( "   by Richard Rozsa, Emanuel Mashian, Lloyd Tabb, and Georges Rahbani\n" );
     printf( "\n" );
     printf( "Usage: GO [options] <label/dir list>    (to change drives and directories)\n" );
@@ -231,7 +236,7 @@ char *GetQuotedString( char *str, int  *leftPos,   int  *rightPos,
         var = str + *leftPos + 1;
         if ( ( *rightPos = strcspn( var, rightQuote ) ) != strlen( var ) )
             {
-            strncpy( returnStr, var, *rightQuote );
+            strncpy( returnStr, var, *rightPos );
             returnStr[ *rightPos ] = 0;
 
             *rightPos += ( *leftPos + 1 );

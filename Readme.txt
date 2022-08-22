@@ -29,3 +29,7 @@ v3.2	1991-09-11	Richard Rozsa
 v3.3	1992-09-28	Richard Rozsa
 - Added /m parameter: make any directory that's not found.
 - Fixed bug that prevented a go to an <alias> value.
+v3.4	1994-01-25	Richard Rozsa
+- Fixed bug in GetQuotedString() where (char *) variable was used
+  instead of (int) to calculate length of strncpy().
+  This fix allows dos variables to be referrenced by aliases.
