@@ -3,6 +3,10 @@
 //
 // Modification LOG:
 //
+// v3.3 09/28/92 - Richard Rozsa
+//      Added /m parameter: make any directory that's not found.
+//      Fixed bug that prevented a go to an <alias> value.
+//
 // v3.2 09/11/91 - Richard Rozsa
 //      Localized some global variables.
 //      Reworked GO and HELP functions.
@@ -35,6 +39,11 @@
 //
 // v0.1 1989,1990 - Emanuel Mashian
 //      Original Coding
+//
+// Wish List:
+//
+// 09/28/92: Add <alias> option that can read a novell drive regardless
+//           of it's mapping.
 //
 
 // --------------------------------------------------------------
@@ -70,13 +79,14 @@ int     quietMode = !OK;
 // --------------------------------------------------------------
 void Help( void )
     {
-    printf( "GO Directory Navagation Utility  Version 3.2  Copyright (c) 1989-1991\n" );
-    printf( "   by Emanuel Mashian, Lloyd Tabb, Georges Rahbani and Richard Rozsa\n" );
+    printf( "GO Directory Navagation Utility  Version 3.3  Copyright (c) 1989-1992\n" );
+    printf( "   by Richard Rozsa, Emanuel Mashian, Lloyd Tabb, and Georges Rahbani\n" );
     printf( "\n" );
     printf( "Usage: GO [options] <label/dir list>    (to change drives and directories)\n" );
     printf( "       options:\n" );
     printf( "            -h  this help screen      -q  quiet mode\n" );
     printf( "            -t  only use table        -d  don't use table\n" );
+    printf( "            -m  make directory when not found\n" );
     printf( "\n" );
     printf( "The go table supports the following syntax:\n" );
     printf( "\n" );
@@ -94,7 +104,7 @@ void Help( void )
     printf( "  !c:\\bin\\work.tbl\n" );
     }
 // --------------------------------------------------------------
-int GetSwitch( char *anyStr, int *useTable, int *useDos )
+int GetSwitch( char *anyStr, int *useTable, int *useDos, int *makeDir )
     {
 
     // ---Help switch
@@ -135,6 +145,12 @@ int GetSwitch( char *anyStr, int *useTable, int *useDos )
                 
                 quietMode = OK;
                 return 4;
+            case 'm':
+
+                // ---Make directory if not present
+
+                *makeDir = OK;
+                return 5;
             default :
 
                 // ---Invalid switch
@@ -424,6 +440,7 @@ int ReadALine( FILE *tableFile, FILE **includeFile, int *isInclude )
         {
         StoreAlias();
         token[ 0 ] = 0;
+        return 0;
         }
 
     GetAToken( line );
@@ -439,10 +456,13 @@ int ReadALine( FILE *tableFile, FILE **includeFile, int *isInclude )
     return strlen( token );
     }
 // --------------------------------------------------------------
-int AttemptChangeDir( int labelFound )
+int AttemptChangeDir( int labelFound, int makeDir )
     {
     int  drive;
     int  retVal;
+    int  minLen;
+    char *pS;
+    char *pE;
 
     // ---Change drive if specified
 
@@ -456,16 +476,24 @@ int AttemptChangeDir( int labelFound )
         if ( getdisk() != drive )
             token[0] = 0;
 
-        // ---Supply current path if only drive specified
+        // ---Done if current path specifies only drive
 
-        if ( strlen( token ) == 2 )
+        if ( token[ 2 ] == 0 )
             {
             getcwd( buffer, MAXLINELENGTH - 1 );
             strlwr( buffer );
             if ( ( buffer[0] - 'a' ) != drive )
                 buffer[0] = 0;
             }
+
+        minLen = 3;
         }
+    else
+        minLen = 1;
+
+    drive = strlen( buffer );
+    if ( ( drive > minLen ) && ( buffer[ drive - 1 ] == '\\' ) )
+        buffer[ drive - 1 ] = 0;
 
     if ( chdir( buffer ) == 0 )
         {
@@ -477,7 +505,62 @@ int AttemptChangeDir( int labelFound )
         }
     else
         {
-        if ( !labelFound )
+
+        // ---Dir change UNsuccessful...
+
+        if ( makeDir )
+            {
+            pS = buffer;
+            if ( pS[1] == ':' )
+                pS += 2;
+            if ( pS[0] == '\\' )
+                {
+                if ( chdir( "\\" ) == -1 )
+                    {
+                    printf( "Couldn't move to root directory\n" );
+                    return ( !OK );
+                    }
+                pS++;
+                }
+
+            for ( ; ( pE = strchr( pS, '\\' ) ) != NULL; )
+                {
+                pE[0] = 0;
+                if ( chdir( pS ) == -1 )
+                    {
+                    if ( mkdir( pS ) == -1 )
+                        {
+                        printf( "Couldn't create directory: %s\n", buffer );
+                        return ( !OK );
+                        }
+                    if ( chdir( pS ) == -1 )
+                        {
+                        printf( "Couldn't move to just created directory: %s\n", buffer );
+                        return ( !OK );
+                        }
+                    }
+                pE[0] = '\\';
+                pS = pE;
+                pS++;
+                }
+            if ( mkdir( pS ) == -1 )
+                {
+                printf( "Couldn't create directory: %s\n", buffer );
+                return ( !OK );
+                }
+            if ( chdir( pS ) == -1 )
+                {
+                printf( "Couldn't move to just created directory: %s\n", buffer );
+                return ( !OK );
+                }
+
+            // ---Make/change dir successful...
+
+            if ( !quietMode )
+                printf( "%s\n", buffer );
+            }
+        
+        else if ( !labelFound )
             {
             printf( "Invalid Path: %s\n", buffer );
             return ( !OK );   
@@ -487,16 +570,16 @@ int AttemptChangeDir( int labelFound )
     return ( OK );
     }
 // --------------------------------------------------------------
-void ParseForDirs( int labelFound )
+void ParseForDirs( int labelFound, int makeDir )
     {
     for ( ; token[0] != 0; )
         {
-        AttemptChangeDir( labelFound );
+        AttemptChangeDir( labelFound, makeDir );
         GetAToken( NULL );
         }
     }
 // --------------------------------------------------------------
-int ScanForLabels( FILE *tableFile, int useTable, int useDos )
+int ScanForLabels( FILE *tableFile, int useTable, int useDos, int makeDir )
     {
     FILE *includeFile;
     int  labelFound = !OK;
@@ -516,7 +599,7 @@ int ScanForLabels( FILE *tableFile, int useTable, int useDos )
                 {
                 labelFound = OK;
                 GetAToken( NULL );
-                ParseForDirs( labelFound );
+                ParseForDirs( labelFound, makeDir );
                 }
             }
         }
@@ -533,7 +616,7 @@ int ScanForLabels( FILE *tableFile, int useTable, int useDos )
             }
         strcpy( line, alias );
         GetAToken( line );
-        ParseForDirs( labelFound );
+        ParseForDirs( labelFound, makeDir );
         }
 
     return ( OK );
@@ -571,6 +654,7 @@ int ProcessParameters( int argCnt, char **aliases )
     int  dirPassed   = !OK;
     int  useTable    = OK;
     int  useDos      = OK;
+    int  makeDir     = !OK;
 
     for ( i = 1, tableOpened = !OK; i <= argCnt; i++ )
         {
@@ -590,7 +674,7 @@ int ProcessParameters( int argCnt, char **aliases )
 
         // ---Test for and set command line switches
         
-        helpLvl = GetSwitch( alias, &useTable, &useDos );
+        helpLvl = GetSwitch( alias, &useTable, &useDos, &makeDir );
         
         if ( helpLvl == 1 )
             return ( !OK );
@@ -609,7 +693,7 @@ int ProcessParameters( int argCnt, char **aliases )
 
             // ---Scan the table, looking for matches along the way
 
-            ScanForLabels( tableFile, useTable, useDos );
+            ScanForLabels( tableFile, useTable, useDos, makeDir );
             }
         }
 

@@ -26,3 +26,6 @@ v3.2	1991-09-11	Richard Rozsa
 - Localized some global variables.
 - Reworked GO and HELP functions.
 - General cleanup.
+v3.3	1992-09-28	Richard Rozsa
+- Added /m parameter: make any directory that's not found.
+- Fixed bug that prevented a go to an <alias> value.
