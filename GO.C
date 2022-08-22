@@ -3,6 +3,14 @@
 //
 // Modification LOG:
 //
+// v3.2 09/11/91 - Richard Rozsa
+//      Localized some global variables.
+//      Reworked GO and HELP functions.
+//      General cleanup.
+//
+// v3.1 09/09/91 - Richard Rozsa
+//      Added support for novell style "..." directory references.
+//
 // v3.0 09/09/91 - Richard Rozsa
 //      Converted source code from PASCAL to C.
 //      Now allows go tables to have the read-only file attribute set.
@@ -20,12 +28,12 @@
 //      Added support for 'home' directory.
 //      Added command line switch processing (to get help screen).
 //
-// v1.1 ??/??/91 - Georges Rabahni
+// v1.1 ??/??/91 - Georges Rahbani
 //      Added support for aliased variables (placed in angle brackets)
 //
 // v1.0 04/19/91 - Lloyd Tabb
 //
-// v0.1 ??/??/91 - Emanuel Mashian
+// v0.1 1989,1990 - Emanuel Mashian
 //      Original Coding
 //
 
@@ -38,9 +46,10 @@
 // --------------------------------------------------------------
 #define OK 1
 
-#define CMDLINELENGTH 127
-#define MAXLINELENGTH 500
+#define MAXLINELENGTH 1024
 #define TAB 0x09
+
+#define TOKENSEP " \t,"
 // --------------------------------------------------------------
 typedef struct nodeType
     {
@@ -50,78 +59,90 @@ typedef struct nodeType
 	struct nodeType *rightChild;
 	};
 // --------------------------------------------------------------
-FILE    *tableFile;
-char    tableFileName[ CMDLINELENGTH ];
-FILE    *includeFile;
-int     labelFound;
 char    *line;
 char    *alias;
 char    *buffer;
-int     isInclude;
 char    *token;
-char    tokenSep[] = " \t,";
 
 struct  nodeType *root = NULL;
 
-int     helpLvl;
-int     useTable  = OK;
-int     useDos    = OK;
 int     quietMode = !OK;
 // --------------------------------------------------------------
 void Help( void )
     {
-    printf( "GO v3.0 Directory Navagation Utility\n" );
-    printf( "Copyright (c) 1990,1991  Nobody in particular.\n" );
+    printf( "GO Directory Navagation Utility  Version 3.2  Copyright (c) 1989-1991\n" );
+    printf( "   by Emanuel Mashian, Lloyd Tabb, Georges Rahbani and Richard Rozsa\n" );
     printf( "\n" );
-    printf( "usage: GO [options] <alias list>  to change drive and directory\n" );
+    printf( "Usage: GO [options] <label/dir list>    (to change drives and directories)\n" );
     printf( "       options:\n" );
-    printf( "            -h            this help screen\n" );
-    printf( "            -t            only use table\n" );
-    printf( "            -d            don't use table\n" );
-    printf( "            -q            quiet mode\n" );
-    printf( "\n" );
-    printf( "Requires GO.TBL in same directory as GO.EXE\n" );
+    printf( "            -h  this help screen      -q  quiet mode\n" );
+    printf( "            -t  only use table        -d  don't use table\n" );
     printf( "\n" );
     printf( "The go table supports the following syntax:\n" );
     printf( "\n" );
-    printf( "* directory names and labels can be explicitly included.\n" );
-    printf( "* aliases can be defined by enclosing the alias in <brackets>.\n" );
-    printf( "* dos variables can be referenced by using batch syntax %var%.\n" );
+    printf( "* Directory names and labels can be explicitly included.\n" );
+    printf( "* Aliases can be defined by enclosing the alias in <brackets>.\n" );
+    printf( "* DOS variables can be referenced by using batch syntax %var%.\n" );
+    printf( "* Include files are defined by using the bang symbol: !filename\n" );
+    printf( "* The HOME label will be searched for if no parameters are passed.\n" );
     printf( "\n" );
     printf( "examples:\n" );
     printf( "  tools        l:\\utils, c:\\bin\n" );
     printf( "  <netdrive>   v:\\database\n" );
     printf( "  work         <netdrive>\\newproj\\stuff  c:\\newproj\n" );
-    printf( "  dosstuff     %cdos%c\\dos\n", '%', '%' );   
+    printf( "  dosstuff     %cdos%c\\dos\n", '%', '%' );
+    printf( "  !c:\\bin\\work.tbl\n" );
     }
 // --------------------------------------------------------------
-int GetSwitch( char *anyStr )
+int GetSwitch( char *anyStr, int *useTable, int *useDos )
     {
 
     // ---Help switch
 
-    if ( strcmp( anyStr, "?"  ) == 0 )
+    if ( ( anyStr[1] == 0 ) && ( anyStr[0] == '?' ) )
+        {
+        Help();
         return 1;
-    if ( strcmp( anyStr, "-?" ) == 0 )
-        return 1;
-    if ( strcmp( anyStr, "/?" ) == 0 )
-        return 1;
-    if ( strcmp( anyStr, "-h" ) == 0 )
-        return 1;
-    if ( strcmp( anyStr, "/h" ) == 0 )
-        return 1;
-    if ( strcmp( anyStr, "-t" ) == 0 )
-        return 2;
-    if ( strcmp( anyStr, "/t" ) == 0 )
-        return 2;
-    if ( strcmp( anyStr, "-d" ) == 0 )
-        return 3;
-    if ( strcmp( anyStr, "/d" ) == 0 )
-        return 3;
-    if ( strcmp( anyStr, "-q" ) == 0 )
-        return 4;
-    if ( strcmp( anyStr, "/q" ) == 0 )
-        return 4;
+        }
+
+    if ( ( anyStr[2] == 0 ) && ( ( anyStr[0] == '-' ) || ( anyStr[0] == '/' ) ))
+        {
+        switch ( anyStr[1] )
+            {
+            case '?':
+                Help();
+                return 1;
+            case 'h':
+                Help();
+                return 1;
+            case 't':
+    
+                // ---Use table only
+                
+                *useTable = OK;
+                *useDos   = !OK;
+                return 2;
+            case 'd':
+    
+                // ---Use dos only
+                
+                *useTable = !OK;
+                *useDos   = OK;
+                return 3;
+            case 'q':
+    
+                // ---Quiet mode
+                
+                quietMode = OK;
+                return 4;
+            default :
+
+                // ---Invalid switch
+
+                printf( "ERROR: Invalid switch.\n" );
+                return 1;
+            }
+        }
 
     return 0;
     }
@@ -277,10 +298,43 @@ int ExpandAnAlias( char **passStr )
     return ( !OK );
     }
 // --------------------------------------------------------------
+int ExpandDots( char **passStr )
+    {
+    char *localStr;
+    int  i;
+    int  openIndex;
+    char *dots;
+
+    localStr = *passStr;
+
+    // ---Check for novell style dots "..." (expand if found)...
+
+    if ( ( dots = strstr( localStr, "..." ) ) != NULL )
+        {
+        openIndex = ( localStr - dots );
+        strncpy( buffer, localStr, ( openIndex + 2 ) );
+        buffer[ openIndex + 2 ] = 0;
+        for ( i = 1; localStr[ openIndex + 1 + i ] == '.' ; i++ )
+            {
+            strcat( buffer, "\\.." );
+            }
+        localStr += ( openIndex + 1 + i );
+        strcat( buffer, localStr );
+
+        // ---Return expanded string.
+
+        *passStr = buffer;
+        return ( OK );
+        }
+
+    *passStr = localStr;
+    return ( !OK );
+    }
+// --------------------------------------------------------------
 void GetAToken( char *str )
     {
     
-    token = strtok( str, tokenSep );
+    token = strtok( str, TOKENSEP );
 
     // ---Expand any DOS variables.
 
@@ -289,6 +343,10 @@ void GetAToken( char *str )
     // ---Expand aliases.
 
     while ( ExpandAnAlias( &token ) );
+
+    // ---Expand dots.
+
+    while ( ExpandDots( &token ) );
 
     }
 // --------------------------------------------------------------
@@ -310,12 +368,12 @@ int StoreAlias( void )
     return ( !OK );
     }
 // --------------------------------------------------------------
-int OpenIncludeFile( void )
+int OpenIncludeFile( FILE **includeFile, int *isInclude )
     {
 
     // ---Make sure there isn't an include file already open
 
-    if ( isInclude )
+    if ( *isInclude )
         {
         printf( "ERROR: An include file can't open another include file\n" );
         return ( !OK );
@@ -327,32 +385,32 @@ int OpenIncludeFile( void )
     
     // ---Attempt to open include file
 
-    if ( ( includeFile = fopen( token, "r" ) ) == NULL )
+    if ( ( *includeFile = fopen( token, "r" ) ) == NULL )
         {
         printf( "ERROR: Could not open table [%s]\n", token );
         return ( !OK );
         }
 
-    isInclude = OK;
+    *isInclude = OK;
 
     return ( OK );
     }
 // --------------------------------------------------------------
-int ReadALine( void )
+int ReadALine( FILE *tableFile, FILE **includeFile, int *isInclude )
     {
     
     line[0] = 0;
 
-    if ( isInclude )
+    if ( *isInclude )
         {
-        if ( fgets( line, MAXLINELENGTH, includeFile ) == NULL )
+        if ( fgets( line, MAXLINELENGTH, *includeFile ) == NULL )
             {
-            isInclude = !OK;
-            fclose( includeFile );
+            *isInclude = !OK;
+            fclose( *includeFile );
             }
         }
 
-    if ( !isInclude )
+    if ( !(*isInclude) )
         fgets( line, MAXLINELENGTH, tableFile );
     
     line[ strlen( line ) - 1 ] = 0;
@@ -374,14 +432,14 @@ int ReadALine( void )
 
     if ( token[0] == '!' )
         {
-        OpenIncludeFile();
+        OpenIncludeFile( includeFile, isInclude );
         token[ 0 ] = 0;
         }
     
     return strlen( token );
     }
 // --------------------------------------------------------------
-int AttemptChangeDir( void )
+int AttemptChangeDir( int labelFound )
     {
     int  drive;
     int  retVal;
@@ -429,27 +487,27 @@ int AttemptChangeDir( void )
     return ( OK );
     }
 // --------------------------------------------------------------
-void ParseForDirs( void )
+void ParseForDirs( int labelFound )
     {
     for ( ; token[0] != 0; )
         {
-        AttemptChangeDir();
+        AttemptChangeDir( labelFound );
         GetAToken( NULL );
         }
     }
 // --------------------------------------------------------------
-int ScanForLabels( void )
+int ScanForLabels( FILE *tableFile, int useTable, int useDos )
     {
-
-    isInclude  = !OK;
-    labelFound = !OK;
+    FILE *includeFile;
+    int  labelFound = !OK;
+    int  isInclude  = !OK;
 
     while ( ( !feof( tableFile ) ) && ( !labelFound ) && ( useTable ) )
         {
 
         // ---Read a line, either from the GO table or any include tables
 
-        if ( ReadALine() )
+        if ( ReadALine( tableFile, &includeFile, &isInclude ) )
             {
 
             // ---If found, stop looking
@@ -458,7 +516,7 @@ int ScanForLabels( void )
                 {
                 labelFound = OK;
                 GetAToken( NULL );
-                ParseForDirs();
+                ParseForDirs( labelFound );
                 }
             }
         }
@@ -475,17 +533,93 @@ int ScanForLabels( void )
             }
         strcpy( line, alias );
         GetAToken( line );
-        ParseForDirs();
+        ParseForDirs( labelFound );
         }
+
+    return ( OK );
+    }
+// --------------------------------------------------------------
+int GoToTopOfTable( FILE **tableFile, int tableOpened, char *fileName )
+    {
+
+    if ( !tableOpened )
+        {
+        if ( ( *tableFile = fopen( fileName, "r" ) ) == NULL )
+            {
+            printf( "ERROR: Could not open table [%s]\n", fileName );
+            return ( !OK );
+            }
+        tableOpened = OK;
+        }
+    else
+        {
+        if ( fseek( *tableFile, 0L, SEEK_SET ) != 0 )
+            {
+            printf( "ERROR: Could not reposition table [%s]\n", fileName );
+            return ( !OK );
+            }
+        }
+    return ( OK );
+    }
+// --------------------------------------------------------------
+int ProcessParameters( int argCnt, char **aliases )
+    {
+    FILE *tableFile;
+    int  i;
+    int  helpLvl;
+    int  tableOpened = !OK;
+    int  dirPassed   = !OK;
+    int  useTable    = OK;
+    int  useDos      = OK;
+
+    for ( i = 1, tableOpened = !OK; i <= argCnt; i++ )
+        {
+
+        if ( i < argCnt )
+            strcpy( alias, strlwr( aliases[ i ] ) );
+        else
+            {
+            if ( !dirPassed )
+                
+                // ---Store the parameter in alias ('home' if no parameter)
+
+                strcpy( alias, "home" );
+            else
+                break;
+            }
+
+        // ---Test for and set command line switches
+        
+        helpLvl = GetSwitch( alias, &useTable, &useDos );
+        
+        if ( helpLvl == 1 )
+            return ( !OK );
+
+        if ( helpLvl == 0 )
+            {
+            dirPassed = OK;
+            if ( useTable )
+                {
+
+                // ---Open GO.TBL
+                                
+                if ( !GoToTopOfTable( &tableFile, tableOpened, aliases[0] ) )
+                    return ( !OK );
+                }
+
+            // ---Scan the table, looking for matches along the way
+
+            ScanForLabels( tableFile, useTable, useDos );
+            }
+        }
+
+    fclose( tableFile );
 
     return ( OK );
     }
 // --------------------------------------------------------------
 int Go( int argCnt, char **aliases )
     {
-    int i;
-    int tableOpened;
-    int dirPassed;
 
     // ---Check for valid dos version
 
@@ -495,7 +629,7 @@ int Go( int argCnt, char **aliases )
         return ( !OK );
         }
 
-    // ---Allocate space for vars
+    // ---Allocate space for variables
 
     if ( ( line   = malloc( MAXLINELENGTH ) ) == NULL )
         {
@@ -513,78 +647,10 @@ int Go( int argCnt, char **aliases )
         return ( !OK );
         }
 
-    // ---Store the parameter in alias ('home' if no parameter)
+    // ---Process the parameters
 
-    tableOpened = !OK;
-    dirPassed   = !OK;
-    for ( i = 1, tableOpened = !OK; i <= argCnt; i++ )
-        {
-
-        if ( i < argCnt )
-            strcpy( alias, strlwr( aliases[ i ] ) );
-        else
-            {
-            if ( !dirPassed )
-                strcpy( alias, "home" );
-            else
-                break;
-            }
-
-        // ---Test for command line switches
-        helpLvl = GetSwitch( alias );
-
-        switch ( helpLvl )
-            {
-            case 1:
-                // ---Help
-                Help();
-                exit ( 1 );
-            case 2:
-                // ---Use table only
-                useTable = OK;
-                useDos   = !OK;
-                break;
-            case 3:
-                // ---Use dos only
-                useTable = !OK;
-                useDos   = OK;
-                break;
-            case 4:
-                // ---Quiet mode
-                quietMode = OK;
-                break;
-            case 0:
-                // ---Open GO.TBL
-
-                dirPassed = OK;
-                if ( useTable )
-                    {
-                    if ( ( !tableOpened ) &&
-                         ( ( tableFile = fopen( aliases[0], "r" ) ) == NULL ) )
-                        {
-                        printf( "ERROR: Could not open table [%s]\n",
-                                tableFileName );
-                        return ( !OK );
-                        }
-                    else
-                        {
-                        if ( fseek( tableFile, 0L, SEEK_SET ) != 0 )
-                            {
-                            printf( "ERROR: Could not reposition table [%s]\n",
-                                tableFileName );
-                            return ( !OK );
-                            }
-                        }
-                    tableOpened = OK;
-                    }
-
-                // ---Scan the table, looking for matches along the way
-
-                ScanForLabels();
-            }
-        }
-
-    fclose( tableFile );
+    if ( !ProcessParameters( argCnt, aliases ) )
+        return ( !OK );
 
     return ( OK );
     }
@@ -602,6 +668,7 @@ void main( int argc, char **argv )
     if ( !Go( argc, argv ) )
         exit ( 1 );
 
+    exit ( 0 );
     }
 #endif
 // --------------------------------------------------------------
