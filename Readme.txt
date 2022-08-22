@@ -17,3 +17,6 @@ v1.3	1991-08-29	Richard Rozsa
 - (aliases currently not supported in include files.)
 v2.0	1991-08-29	Richard Rozsa
 - Added support for DOS variables in expansion list (%var%).
+v3.0	1991-09-09	Richard Rozsa
+- Converted source code from PASCAL to Borland C.
+- Now allows go tables to have the read-only file attribute set.
