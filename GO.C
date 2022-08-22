@@ -3,6 +3,9 @@
 //
 // Modification LOG:
 //
+// v3.5 05/23/95 - Richard Rozsa
+//      No longer upper case strings. Preserve typed or alias file case.
+//
 // v3.4 01/25/94 - Richard Rozsa
 //      Fixed bug in GetQuotedString() where (char *) variable was used
 //      instead of (int) to calculate length of strncpy().
@@ -84,7 +87,7 @@ int     quietMode = !OK;
 // --------------------------------------------------------------
 void Help( void )
     {
-    printf( "GO Directory Navagation Utility  Version 3.4  Copyright (c) 1989-1994\n" );
+    printf( "GO Directory Navagation Utility  Version 3.5  Copyright (c) 1989-1994\n" );
     printf( "   by Richard Rozsa, Emanuel Mashian, Lloyd Tabb, and Georges Rahbani\n" );
     printf( "\n" );
     printf( "Usage: GO [options] <label/dir list>    (to change drives and directories)\n" );
@@ -228,7 +231,7 @@ char *GetAliasValue( char *str, struct nodeType **node )
 char *GetQuotedString( char *str, int  *leftPos,   int  *rightPos,
                                   char *leftQuote, char *rightQuote )
     {
-    char returnStr[ MAXLINELENGTH ];
+    static char returnStr[ MAXLINELENGTH ];
     char *var;
        
     if ( ( *leftPos = strcspn( str, leftQuote ) ) != strlen( str ) )
@@ -265,14 +268,13 @@ int ExpandAVariable( char **passStr )
     dosVar = GetQuotedString( localStr, &openIndex, &closeIndex, "%", "%" );
     if ( closeIndex > 0 )
         {
-        dosVarStr = getenv( strupr( dosVar ) );
+        dosVarStr = getenv( dosVar );
         if ( dosVarStr != NULL )
             {
             strncpy( buffer, localStr, openIndex );
             buffer[ openIndex ] = 0;
             strcat(  buffer, dosVarStr );
             strcat(  buffer, ( localStr + closeIndex + 1 ) );
-            strlwr(  buffer );
 
             // ---Return expanded string.
 
@@ -306,7 +308,6 @@ int ExpandAnAlias( char **passStr )
             buffer[ openIndex ] = 0;
             strcat(  buffer, valuestr );
             strcat(  buffer, ( localStr + closeIndex + 1 ) );
-            strlwr(  buffer );
 
             // ---Return expanded string.
 
@@ -435,7 +436,6 @@ int ReadALine( FILE *tableFile, FILE **includeFile, int *isInclude )
         fgets( line, MAXLINELENGTH, tableFile );
     
     line[ strlen( line ) - 1 ] = 0;
-    strlwr( line );
 
     // ---LTrim the line.
 
@@ -486,7 +486,6 @@ int AttemptChangeDir( int labelFound, int makeDir )
         if ( token[ 2 ] == 0 )
             {
             getcwd( buffer, MAXLINELENGTH - 1 );
-            strlwr( buffer );
             if ( ( buffer[0] - 'a' ) != drive )
                 buffer[0] = 0;
             }
@@ -665,7 +664,7 @@ int ProcessParameters( int argCnt, char **aliases )
         {
 
         if ( i < argCnt )
-            strcpy( alias, strlwr( aliases[ i ] ) );
+            strcpy( alias, aliases[ i ] );
         else
             {
             if ( !dirPassed )
