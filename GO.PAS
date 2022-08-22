@@ -1,6 +1,17 @@
-
 {$M $1000, 0, 0}        { 4K stack, no heap }
 
+(*
+ * GO directory aliasing utility.  
+ *
+ * Modification LOG:
+ *  
+ * v1.1 Georges Rabahni
+ *      Added support for aliased variables (placed in angle brackets)
+ *
+ * v0.1 Emanuel Mashian
+ *      Original Coding
+ *
+ *)
 program GO;
 
 uses
@@ -66,6 +77,9 @@ begin
    end;
 
    if ParamCount < 1 then begin
+      Writeln( 'GO v1.2 (C) Directory Navagation Utility' );
+      Writeln( 'Copyright (C) 1991, Nobody in particular.' );
+      Writeln;
       Writeln( 'USAGE: GO <alias>' );
       Halt( 1 );
    end;
