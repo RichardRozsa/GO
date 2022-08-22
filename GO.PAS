@@ -5,19 +5,25 @@
  *
  * Modification LOG:
  *
- * v1.3 Richard Rozsa
- *      Added support for leading white space before labels and aliases.
- *      Cleaned up and commented code.
- *      Added include file support (filename prefixed by '!').
+ * v2.0 08/29/91 - Richard Rozsa
+ *      Added support for DOS variables in expansion list (%var%).
  *
- * v1.2 Richard Rozsa
+ * v1.3 08/29/91 - Richard Rozsa
+ *      Cleaned up and commented code.
+ *      Added support for leading white space before labels and aliases.
+ *      Added include file support (filename prefixed by '!').
+ *      (aliases currently not supported in include files.)
+ *
+ * v1.2 05/24/91 - Richard Rozsa
  *      Added support for 'home' directory.
  *      Added command line switch processing (to get help screen).
  *
- * v1.1 Georges Rabahni
+ * v1.1 ??/??/91 - Georges Rabahni
  *      Added support for aliased variables (placed in angle brackets)
  *
- * v0.1 Emanuel Mashian
+ * v1.0 04/19/91 - Lloyd Tabb
+ *
+ * v0.1 ??/??/91 - Emanuel Mashian
  *      Original Coding
  *
  *)
@@ -57,7 +63,7 @@ var
 procedure Help;
 
 begin
-   Writeln( 'GO v1.3 Directory Navagation Utility' );
+   Writeln( 'GO v2.0 Directory Navagation Utility' );
    Writeln( 'Copyright (c) 1990,1991  Nobody in particular.' );
    Writeln;
    Writeln( 'USAGE: GO <alias>  to change drive and directory' );
@@ -359,6 +365,81 @@ begin
    Close( tableFile );
 end;
 (* ----------------------------------------------------------- *)
+function ExpandAnyDosVars : string;
+
+var
+   n      : integer;
+   i      : integer;
+   dosVar : string;
+   err    : boolean;
+   newstr : string;
+
+begin
+   err    := False;
+   n      := 1;
+   newstr := '';
+
+   { ---Find the starting literal part of the string }
+
+   while ( n <= Length( cDir ) ) and ( cDir[n] <> '%' ) do
+   begin
+      newstr := newstr + cDir[n];
+      Inc( n );
+   end;
+
+   { ---Get the DOS variable part. }
+
+   if cDir[n] = '%' then
+   begin
+      dosVar := '';
+      Inc( n );
+      while ( n <= Length( cDir ) ) and ( cDir[n] <> '%' ) do
+      begin
+         dosVar := dosVar + cDir[n];
+         Inc( n );
+      end;
+
+      { ---Make sure we have a valid variable (and expand it)}
+
+      if cDir[n] = '%' then
+      begin
+         dosVar := GetEnv( dosVar );
+      end
+      else
+      begin
+         dosVar := '';
+         err    := True;
+      end;
+
+      { ---Move past the closing '%' }
+
+      Inc( n );
+
+      i := 1;
+      while ( i <= Length( dosVar ) ) do
+      begin
+         newstr := newstr + dosVar[i];
+         Inc( i );
+      end;
+   end;
+
+   { ---Find the ending literal part of the string }
+
+   while ( n <= Length( cDir ) ) and ( cDir[n] <> '%' ) do
+   begin
+      newstr := newstr + cDir[n];
+      Inc( n );
+   end;
+
+   { ---If there was an error, return the original string }
+
+   if err then
+      newstr := cDir;
+
+   ExpandAnyDosVars := newstr;
+
+end;
+(* ----------------------------------------------------------- *)
 procedure ParseForDirs;
 
 begin
@@ -403,6 +484,10 @@ begin
             line := Copy( line, 2, Length( line ) -1 );
          end;
       end;
+
+      { ---Expand any DOS variables in cDir }
+
+      cDir := ExpandAnyDosVars;
 
       { ---If we have any text in cDir, attempt to changedir to it }
 
