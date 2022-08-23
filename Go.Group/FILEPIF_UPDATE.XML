@@ -1,0 +1,212 @@
+<Repository>
+	<Process>
+		<Mode>UPDATE</Mode>
+		<NoActivityWait>0001</NoActivityWait>
+		<ConfigDirEPL>E:\\FilePIF</ConfigDirEPL>
+		<EPLApplicationNameAndPath>ERASE IFSA collector.dll</EPLApplicationNameAndPath>
+		<ApplicationName>UpdateFilePIF</ApplicationName>
+		<Environment>ALPHA</Environment>
+	</Process>
+	<UoW>
+		<UoWEnabled>1</UoWEnabled>
+		<NumberTreshold>1000</NumberTreshold>
+		<SizeTreshold>25</SizeTreshold>
+	</UoW>
+	<Logging>
+		<LoggingActivation>1</LoggingActivation>
+		<LoggingFileName>log.txt</LoggingFileName>
+		<LoggingFileMaxSize>1000</LoggingFileMaxSize>
+		<LoggingFileMaxAge>24</LoggingFileMaxAge>
+		<LoggingFileDirectory>log</LoggingFileDirectory>
+	</Logging>
+	<Traces>
+		<TraceActivation>1</TraceActivation>
+		<TraceFileName>trace.log</TraceFileName>
+		<TraceFileMaxSize>1000</TraceFileMaxSize>
+		<TraceFileDirectory>trace</TraceFileDirectory>
+	</Traces>
+
+	<Input label="ibb_eodbalance">
+		<InputDirectory>IBB\\update\\input</InputDirectory>
+		<InputFileName>IBBB*****C</InputFileName>
+		<ProcessingPriority>4</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_ibb_eodbalance</RejectOutput>
+	</Input>
+	<Input label="ibb_agreement">
+		<InputDirectory>IBB\\update\\input</InputDirectory>
+		<InputFileName>IBBA*****C</InputFileName>
+		<ProcessingPriority>1</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_ibb_agreement</RejectOutput>
+	</Input>
+	<Input label="ibb_party">
+		<InputDirectory>IBB\\update\\input</InputDirectory>
+		<InputFileName>IBBP*****C</InputFileName>
+		<ProcessingPriority>2</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_ibb_party</RejectOutput>
+	</Input>
+	<Input label="ibb_transaction">
+		<InputDirectory>IBB\\update\\input</InputDirectory>
+		<InputFileName>IBBT*****C</InputFileName>
+		<ProcessingPriority>3</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_ibb_transaction</RejectOutput>
+	</Input>
+
+	<Input label="buc_eodbalance">
+		<InputDirectory>BUC\\update\\input</InputDirectory>
+		<InputFileName>BUCB*****C</InputFileName>
+		<ProcessingPriority>4</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_buc_eodbalance</RejectOutput>
+	</Input>
+	<Input label="buc_agreement">
+		<InputDirectory>BUC\\update\\input</InputDirectory>
+		<InputFileName>BUCA*****C</InputFileName>
+		<ProcessingPriority>1</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_buc_agreement</RejectOutput>
+	</Input>
+	<Input label="buc_party">
+		<InputDirectory>BUC\\update\\input</InputDirectory>
+		<InputFileName>BUCP*****C</InputFileName>
+		<ProcessingPriority>2</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_buc_party</RejectOutput>
+	</Input>
+	<Input label="buc_transaction">
+		<InputDirectory>BUC\\update\\input</InputDirectory>
+		<InputFileName>BUCT*****C</InputFileName>
+		<ProcessingPriority>3</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_buc_transaction</RejectOutput>
+	</Input>
+
+	<Input label="reb_eodbalance">
+		<InputDirectory>REB\\update\\input</InputDirectory>
+		<InputFileName>REBB*****C</InputFileName>
+		<ProcessingPriority>4</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_reb_eodbalance</RejectOutput>
+	</Input>
+	<Input label="reb_agreement">
+		<InputDirectory>REB\\update\\input</InputDirectory>
+		<InputFileName>REBA*****C</InputFileName>
+		<ProcessingPriority>1</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_reb_agreement</RejectOutput>
+	</Input>
+	<Input label="reb_party">
+		<InputDirectory>REB\\update\\input</InputDirectory>
+		<InputFileName>REBP*****C</InputFileName>
+		<ProcessingPriority>2</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_reb_party</RejectOutput>
+	</Input>
+	<Input label="reb_transaction">
+		<InputDirectory>REB\\update\\input</InputDirectory>
+		<InputFileName>REBT*****C</InputFileName>
+		<ProcessingPriority>3</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_reb_transaction</RejectOutput>
+	</Input>
+
+	<Input label="fft_eodbalance">
+		<InputDirectory>FFT\\update\\input</InputDirectory>
+		<InputFileName>FFTB*****C</InputFileName>
+		<ProcessingPriority>4</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_fft_eodbalance</RejectOutput>
+	</Input>
+	<Input label="fft_agreement">
+		<InputDirectory>FFT\\update\\input</InputDirectory>
+		<InputFileName>FFTA*****C</InputFileName>
+		<ProcessingPriority>1</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_fft_agreement</RejectOutput>
+	</Input>
+	<Input label="fft_party">
+		<InputDirectory>FFT\\update\\input</InputDirectory>
+		<InputFileName>FFTP*****C</InputFileName>
+		<ProcessingPriority>2</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_fft_party</RejectOutput>
+	</Input>
+	<Input label="fft_transaction">
+		<InputDirectory>FFT\\update\\input</InputDirectory>
+		<InputFileName>FFTT*****C</InputFileName>
+		<ProcessingPriority>3</ProcessingPriority>
+		<DiscardTreshold>5</DiscardTreshold>
+		<RejectOutput>reject_fft_transaction</RejectOutput>
+	</Input>
+
+	<Output label="reject_ibb_eodbalance">
+		<OutputDirectory>IBB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_ibb_agreement">
+		<OutputDirectory>IBB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_ibb_party">
+		<OutputDirectory>IBB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_ibb_transaction">
+		<OutputDirectory>IBB\\update\\rejected</OutputDirectory>
+	</Output>
+
+	<Output label="reject_reb_eodbalance">
+		<OutputDirectory>REB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_reb_agreement">
+		<OutputDirectory>REB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_reb_party">
+		<OutputDirectory>REB\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_reb_transaction">
+		<OutputDirectory>REB\\update\\rejected</OutputDirectory>
+	</Output>
+
+	<Output label="reject_buc_eodbalance">
+		<OutputDirectory>BUC\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_buc_agreement">
+		<OutputDirectory>BUC\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_buc_party">
+		<OutputDirectory>BUC\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_buc_transaction">
+		<OutputDirectory>BUC\\update\\rejected</OutputDirectory>
+	</Output>
+
+	<Output label="reject_fft_eodbalance">
+		<OutputDirectory>FFT\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_fft_agreement">
+		<OutputDirectory>FFT\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_fft_party">
+		<OutputDirectory>FFT\\update\\rejected</OutputDirectory>
+	</Output>
+	<Output label="reject_fft_transaction">
+		<OutputDirectory>FFT\\update\\rejected</OutputDirectory>
+	</Output>
+
+	<LogEntry code="508">
+		<LogType>technical</LogType>
+		<SeverityLevel>WARNING</SeverityLevel>
+		<MessagePrefix>TEC</MessagePrefix>
+	</LogEntry>
+	<LogEntry code="200">
+		<LogType>functional</LogType>
+		<SeverityLevel>WARNING</SeverityLevel>
+		<MessagePrefix>FUNC</MessagePrefix>
+	</LogEntry>	
+	<LogEntry code="516">
+		<LogType>Technical</LogType>
+		<SeverityLevel>FATAL</SeverityLevel>
+		<MessagePrefix>TEC</MessagePrefix>
+	</LogEntry>
+</Repository>

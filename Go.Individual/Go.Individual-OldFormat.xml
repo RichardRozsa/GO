@@ -1,0 +1,396 @@
+<!--										-->
+<!-- Go Directory Alias table							-->
+<!--										-->
+<!-- Example: <MyToken>E:\SomeDirectory</MyToken>				-->
+<!--										-->
+<!-- Tokens can be used in directory values nested as deep as you like		-->
+<!-- by including the token name in curly braces {MyToken}:			-->
+<!--   <MyDrive>E:</MyDrive>							-->
+<!--   <MyDir>{MyDrive}\SomeDirectory</MyDir>					-->
+<!--										-->
+<!-- Registry values can be extracted by refering to the path as an alias:	-->
+<!--   <MyDocuments>{HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal}</MyDocuments> -->
+<!--										-->
+<!-- Environment variables can be extracted by using %VAR% syntax:		-->
+<!--   <Windows>%WinDir%</Windows>						-->
+<!--										-->
+<!-- An alternate path can be specified when the base path is not available:	-->
+<!--   <N_Server>{N: || {BackupDir}}</N_Server>					-->
+<!-- In the example above, N_Server will expand to N: unless it's not available	-->
+<!-- in which case it will expand to {BackupDir} which will further expand if	-->
+<!-- defined.									-->
+<!--										-->
+<!-- Multiple directories can be included in one alias. An explorer window will	-->
+<!-- be opened for each path seperated by a question mark (?):					-->
+<!--   <ProgramFiles>C:\Program Files ? D:\Program Files ? E:\Program Files</ProgramFiles>	-->
+<!--										-->
+<Go>
+  <!--UsenetSearch>
+		<URL></URL>
+		<Search>
+			<Title></Title>
+			<StartDate></StartDate>
+			<MinSize></MinSize>
+			<MaxSize></MaxSize>
+			<Comment></Comment>
+		</Search>
+	</UsenetSearch-->
+	<UsenetSearchUrls>
+		<BinSearchFormatStringOrig>http://www.binsearch.info/?q={0}&amp;max=250&amp;adv_age={1}&amp;server=</BinSearchFormatStringOrig>
+		<BinSearchFormatString>http://www.binsearch.info/index.php?q={0}&amp;m=&amp;max=250&amp;adv_g=&amp;adv_age={1}&amp;adv_sort=date&amp;minsize=&amp;maxsize=&amp;font=&amp;postdate=</BinSearchFormatString>
+		<YabseFormatString>http://www.yabsearch.nl/search/{0}?co=n&amp;results=200&amp;sizemax=0&amp;sizemin=0</YabseFormatString>
+		<!-- <TorrentFormatString>https://www.torrentz.eu/any?q={0}</TorrentFormatString> -->
+		<TorrentNotFoundMessage>No hits. Try adding an asterisk in you search phrase.</TorrentNotFoundMessage>
+		<!--TorrentNotFoundMessage>No torrents Found</TorrentNotFoundMessage-->
+		<!-- <TorrentFormatString>https://kickass.unblocked.la/usearch/{0} {1}/</TorrentFormatString> -->
+		<TorrentFormatString>https://thepiratebay.org/search/{0}/0/99/0</TorrentFormatString>
+		<!--TorrentFormatString>http://kattorrents.co/usearch/{0} {1}/</TorrentFormatString-->
+		<!--TorrentFormatString>http://kickass.to/usearch/{0} {1}/</TorrentFormatString-->
+		<!--TorrentFormatString>http://proxykat.net/usearch/{0} {1}/?field=time_add&amp;sorder=desc</TorrentFormatString-->
+		<!--TorrentFormatString>http://www.torrentportal.com/torrents-search.php?search={0}</TorrentFormatString-->
+
+		<UsenetSearch1>The Daily Show 2017 03 13</UsenetSearch1>
+		<UsenetSearch2>The Daily Show 2017 03 14</UsenetSearch2>
+		<UsenetSearch3>The Daily Show 2017 03 15</UsenetSearch3>
+		<UsenetSearch4>The Daily Show 2017 03 09</UsenetSearch4>
+		
+		<UsenetSearch5>Stephen Colbert 2017 03 13</UsenetSearch5>
+		<UsenetSearch6>Stephen Colbert 2017 03 14</UsenetSearch6>
+		<UsenetSearch7>Stephen Colbert 2017 03 08</UsenetSearch7>
+		<UsenetSearch8>Stephen Colbert 2017 03 09</UsenetSearch8>
+		<UsenetSearch9>Stephen Colbert 2017 03 10</UsenetSearch9>
+		
+		<UsenetSearch10>Anthony Bourdain Parts Unknown s07e08</UsenetSearch10><!-- s07e08 12-jun -->
+		<UsenetSearch11>~~~~</UsenetSearch11>
+		<UsenetSearch12>~~~~</UsenetSearch12><!-- -->
+		<UsenetSearch13>Arrow s05e16 -arrows</UsenetSearch13><!-- s05e16, s05e17, s05e18, s05e19, s05e20, s05e21, s05e22, s05e23, s05e24 -->
+		<UsenetSearch14>Better Call Saul s03e01</UsenetSearch14><!-- s03e01, s03e02, s03e03, s03e04, s03e05, s03e06, s03e07, s03e08, s03e09, s03e10 -->
+		<UsenetSearch15>Daredevil s03e01 -daredevils</UsenetSearch15><!-- -->
+		<UsenetSearch16>DCs Legends of Tomorrow s02e14</UsenetSearch16>
+		<UsenetSearch17>Death in Paradise s06e09</UsenetSearch17>
+		<UsenetSearch18>Father Brown s06e01</UsenetSearch18>
+		<UsenetSearch19>Grace and Frankie s03e01</UsenetSearch19>
+		<UsenetSearch20>Hand of God s02e01 -de</UsenetSearch20><!-- s02e01 2016, s02e02, s02e03, s02e04, s02e05, s02e06, s02e07, s02e08, s02e09, s02e10 -->
+		<UsenetSearch21>Jessica Jones s02e01</UsenetSearch21><!-- s02e01 2018, s02e02, s02e03, s02e04, s02e05, s02e06, s02e07, s02e08, s02e09, s02e10 -->
+		<UsenetSearch23>Last Week Tonight With John Oliver s04e05</UsenetSearch23>
+		<UsenetSearch22>Limitless s01e23</UsenetSearch22>
+		<UsenetSearch24>Limitless s02e01</UsenetSearch24>
+		<UsenetSearch25>Louie s06e01</UsenetSearch25><!-- -->
+		<UsenetSearch26>Luke Case s02e01</UsenetSearch26>
+		<UsenetSearch27>Quantico s02e14</UsenetSearch27>
+		<UsenetSearch28>~~~~</UsenetSearch28>
+		<UsenetSearch29>Sherlock s04e04 -1984</UsenetSearch29><!-- -->
+		<UsenetSearch30>Saturday Night Live s41e23</UsenetSearch30>
+		<UsenetSearch31>Saturday Night Live s42e16</UsenetSearch31><!-- -->
+		<UsenetSearch32>Stranger Things s02e01</UsenetSearch32>
+		<UsenetSearch33>~~~~</UsenetSearch33><!-- -->
+		<UsenetSearch34>Supergirl s02e16</UsenetSearch34>
+		<UsenetSearch35>~~~~</UsenetSearch35><!-- -->
+		<UsenetSearch36>The Big Bang Theory s10e18</UsenetSearch36><!-- -->
+		<UsenetSearch37>The Path -Spooksville -Star -Motives -Daredevil -Breakout s01e11</UsenetSearch37><!-- -->
+		<UsenetSearch38>~~~~</UsenetSearch38>
+		<UsenetSearch39>The Flash s03e16 -skins -flashforward -flashpoint -flashpont -forward -gordon -voltron -backs -sweden -swedish</UsenetSearch39><!-- s03e10, s03e11, s03e12, s03e13, s03e14, s03e15, s03e16, s03e17, s03e18, s03e19, s03e20, s03e21, s03e22, s03e23 -->
+		<UsenetSearch40>The Graham Norton Show s21e01</UsenetSearch40><!-- -->
+		<UsenetSearch41>The Librarians s03e11</UsenetSearch41><!-- -->
+		<UsenetSearch42>~~~~</UsenetSearch42>
+		<UsenetSearch43>Through the Wormhole s07e05</UsenetSearch43><!-- -->
+		<UsenetSearch44>Years of Living Dangerously s02e08</UsenetSearch44><!-- -->
+		<UsenetSearch45>~~~~</UsenetSearch45>
+		<UsenetSearch46>~~~~</UsenetSearch46>
+		<UsenetSearch47>Reshad Feild</UsenetSearch47>
+		<UsenetSearch48>Rozsa -Miklos -Rozsaszinsajt -Rozsas -Sandor -rozsadku -Johnny -Gerhardt -Rachmaninov -Edesanyam</UsenetSearch48>
+		<UsenetSearch49>~~~~</UsenetSearch49>
+
+		<UsenetSearch50>Forkladd gud</UsenetSearch50>
+		<UsenetSearch51>The Sarah Silverman Program Inappropriate Acts</UsenetSearch51>
+		<UsenetSearch52>Nehemiah and the Great Work Reverend CL Franklin</UsenetSearch52>
+		<UsenetSearch53>Blues Pour Flirter Thielemans</UsenetSearch53>
+		<UsenetSearch54>Morisson Zusje</UsenetSearch54>
+		<UsenetSearch55>The Three Questions -only -disappointment seeds:1</UsenetSearch55>
+		<UsenetSearch56>~~~~ Christianity First Thousand Years -Three</UsenetSearch56>
+		<UsenetSearch57>Jesus Spirit God</UsenetSearch57>
+		<UsenetSearch58>Whirling Dervishes -trance</UsenetSearch58>
+		<UsenetSearch59>Hawaii Humpbacks</UsenetSearch59>
+		<UsenetSearch60>Teppo Hauta-Aho</UsenetSearch60>
+		<UsenetSearch61>Schnitka</UsenetSearch61>
+		<UsenetSearch62>Abel Zuske</UsenetSearch62>
+		<UsenetSearch63>Talky Dom</UsenetSearch63>
+		<UsenetSearch64>Agda de Munik</UsenetSearch64>
+		<UsenetSearch65>The Girl Who Saved the King of Sweden by Jonas Jonasson</UsenetSearch65>
+		<UsenetSearch66>~~~~</UsenetSearch66>
+		<UsenetSearch67>"Rabbit Ears" -Without</UsenetSearch67>
+		<UsenetSearch68></UsenetSearch68>
+		<UsenetSearch69></UsenetSearch69>
+		
+		<UsenetSearch70></UsenetSearch70>
+		<UsenetSearch71></UsenetSearch71>
+		<UsenetSearch72></UsenetSearch72>
+		<UsenetSearch73></UsenetSearch73>
+		<UsenetSearch74></UsenetSearch74>
+		<UsenetSearch75></UsenetSearch75>
+		<UsenetSearch76></UsenetSearch76>
+		<UsenetSearch77></UsenetSearch77>
+		<UsenetSearch78></UsenetSearch78>
+		<UsenetSearch79></UsenetSearch79>
+
+		<UsenetSearch80></UsenetSearch80>
+		<UsenetSearch81></UsenetSearch81>
+		<UsenetSearch82></UsenetSearch82>
+		<UsenetSearch83></UsenetSearch83>
+		<UsenetSearch84></UsenetSearch84>
+		<UsenetSearch85></UsenetSearch85>
+		<UsenetSearch86></UsenetSearch86>
+		<UsenetSearch87></UsenetSearch87>
+		<UsenetSearch88></UsenetSearch88>
+		<UsenetSearch89></UsenetSearch89>
+		
+		<UsenetSearch90></UsenetSearch90>
+		<UsenetSearch91></UsenetSearch91>
+		<UsenetSearch92></UsenetSearch92>
+		<UsenetSearch93></UsenetSearch93>
+		<UsenetSearch94></UsenetSearch94>
+		<UsenetSearch95></UsenetSearch95>
+		<UsenetSearch96></UsenetSearch96>
+		<UsenetSearch97></UsenetSearch97>
+		<UsenetSearch98></UsenetSearch98>
+		<UsenetSearch99></UsenetSearch99>
+
+		<UsenetSearch100></UsenetSearch100>
+		<UsenetSearch101></UsenetSearch101>
+		<UsenetSearch102></UsenetSearch102>
+		<UsenetSearch103></UsenetSearch103>
+		<UsenetSearch104></UsenetSearch104>
+		<UsenetSearch105></UsenetSearch105>
+		<UsenetSearch106></UsenetSearch106>
+		<UsenetSearch107></UsenetSearch107>
+		<UsenetSearch108></UsenetSearch108>
+		<UsenetSearch109></UsenetSearch109>
+		
+		<UsenetSearch110></UsenetSearch110>
+		<UsenetSearch111></UsenetSearch111>
+		<UsenetSearch112></UsenetSearch112>
+		<UsenetSearch113></UsenetSearch113>
+		<UsenetSearch114></UsenetSearch114>
+		<UsenetSearch115></UsenetSearch115>
+		<UsenetSearch116></UsenetSearch116>
+		<UsenetSearch117></UsenetSearch117>
+		<UsenetSearch118></UsenetSearch118>
+		<UsenetSearch119></UsenetSearch119>
+		<UsenetSearch120></UsenetSearch120>
+	</UsenetSearchUrls>
+	<Urls>
+		<BelastingsamenwerkingURL>https://digitalebalie.bsgr.nl/subject.gegevens.php</BelastingsamenwerkingURL>
+		<BelastingsamenwerkingUsername>See DigiD</BelastingsamenwerkingUsername>
+		<BelastingsamenwerkingPassword></BelastingsamenwerkingPassword>
+		<PNOURL>https://web.pnozorgverzekering.nl/Account/Login</PNOURL>
+		<PNOUsername>See DigiD</PNOUsername>
+		<PNOPassword></PNOPassword>
+		<MijnOverheidURL>https://mijn.overheid.nl</MijnOverheidURL>
+		<MijnOverheidUsername>See DigiD</MijnOverheidUsername>
+		<MijnOverheidPassword></MijnOverheidPassword>
+		<ChaseURL>https://www.chase.com/</ChaseURL>
+		<ChaseUsername>rozsa1944</ChaseUsername>
+		<ChasePassword>Bismi!!ah1!</ChasePassword>
+		<FirstTechURL>https://online.firsttechcu.com/</FirstTechURL>
+		<FirstTechUsername>rozsa1960</FirstTechUsername>
+		<FirstTechPassword>Bismillah7</FirstTechPassword>
+		<ABNAmroURL>https://www.abnamro.nl/en/logon/identification.html</ABNAmroURL>
+		<ABNAmroUsername>627866271</ABNAmroUsername>
+		<ABNAmroPassword>See card (377)</ABNAmroPassword>
+		<ABNAmroMastercardURL>https://www.icscards.nl/nlic/portal/abnamro/login</ABNAmroMastercardURL>
+		<ABNAmroMastercardUsername>rrozsa</ABNAmroMastercardUsername>
+		<ABNAmroMastercardPassword>Bismillah7</ABNAmroMastercardPassword>
+    	<AmericanExpressURL>https://www.americanexpress.com/nl/</AmericanExpressURL>
+		<AmericanExpressUsername>richardrozsa</AmericanExpressUsername>
+		<AmericanExpressPassword>salam7</AmericanExpressPassword>
+		<IngURL>https://mijn.ing.nl/internetbankieren/SesamLoginServlet</IngURL>
+		<INGUsername>84mpn3pm</INGUsername>
+		<INGPassword>Bismillah8</INGPassword>
+		<PayPalURL>https://www.paypal.com/signin/?country.x=NL&amp;locale.x=nl_NL</PayPalURL>
+		<PayPalUsername>richard@rozsa.net</PayPalUsername>
+		<PayPalPassword>Bismi!!ah1!</PayPalPassword>
+		<DigiDURL>https://digid.nl/inloggen</DigiDURL>
+		<DigiDUsername>richard_rozsa</DigiDUsername>
+		<DigiDPassword>Bismi!!ah3!</DigiDPassword>
+		<KvKURL>https://diensten.kvk.nl/tb/html/localresponse0?TAM_OP=login&amp;USERNAME=unauthenticated&amp;ERROR_CODE=0x00000000&amp;URL=%2Finloggen.html&amp;REFERER=http%3A%2F%2Fwww.kvk.nl%2Fuitgelogd%2F&amp;HOSTNAME=diensten.kvk.nl</KvKURL>
+		<KvKUsername>WWB83Y6U</KvKUsername>
+		<KvKPassword>WCUJS3CU</KvKPassword>
+
+		<ICloudURL>https://www.icloud.com/</ICloudURL>
+		<ICloudUsername>richard_rozsa@hotmail.com</ICloudUsername>
+		<ICloudPassword>Bismi!!ah3!</ICloudPassword>
+		<QuickenURL>https://www.quicken.com/my-account</QuickenURL>
+		<QuickenUsername>richard_rozsa@hotmail.com</QuickenUsername>
+		<QuickenPassword>Bismi!!ah1!</QuickenPassword>
+		<KPNURL>https://www.kpn.com/zakelijk/inloggen-mijnkpn.htm</KPNURL>
+		<KPNUsername>richardrozsa</KPNUsername>
+		<KPNPassword>Bismillah7</KPNPassword>
+		<MijnOverheidURL>https://mijn.overheid.nl/berichtenbox/inbox</MijnOverheidURL>
+		<MijnOverheidUsername>richard_rozsa</MijnOverheidUsername>
+		<MijnOverheidPassword>Bismi!!ah3!</MijnOverheidPassword>
+		<OomaURL>https://my.ooma.com/dashboard</OomaURL>
+		<OomaUsername>7025346440</OomaUsername>
+		<OomaPassword>Bismi!!ah3!</OomaPassword>
+		<Tele2URL>https://mijntele2.tele2.nl/mijntele2/4G/home.html#/</Tele2URL>
+		<Tele2Username>richard_rozsa@hotmail.com</Tele2Username>
+		<Tele2Password>Bismi!!ah7!</Tele2Password>
+		<TelfortURL>https://www.telfort.nl/ca/loginbox.do?service=https%3A%2F%2Fmijn.telfort.nl%2Fecare&amp;continue=%2Finloggen%2Fverificatie%2F&amp;loginType=CT</TelfortURL>
+		<TelfortUsername>0619269279</TelfortUsername>
+		<TelfortPassword>Bismillah31</TelfortPassword>
+		<TMobileURL>https://www.t-mobile.nl/inloggen-op-mytmobile?vid=PersoonlijkLogin</TMobileURL>
+		<TMobileUsername>0614543136</TMobileUsername>
+		<TMobilePassword>Aardvrouw123!</TMobilePassword>
+		<TMobilePUK>24245858</TMobilePUK>
+		<TMobile2URL>https://www.t-mobile.nl/inloggen-op-mytmobile?vid=PersoonlijkLogin</TMobile2URL>
+		<TMobile2Username>0651171274</TMobile2Username>
+		<TMobile2Password>vnmp4fpr</TMobile2Password>
+		<ZiggoURL>https://login.ziggo.nl/amserver/UI/Login?realm=users&amp;baseURLOverride=https://login.ziggo.nl/amserver/UI/Login%3Frealm=users&amp;goto=https://www.ziggo.nl/secure.jsp%3Fgoto=https://www.ziggo.nl/mijn-ziggo/</ZiggoURL>
+		<ZiggoUsername>richard_rozsa</ZiggoUsername>
+		<ZiggoPassword>Bismillah7</ZiggoPassword>
+		<PNOURL>https://web.pnozorgverzekering.nl/Account/LoginMijn</PNOURL>
+		<PNOUsername>cedirozsa-mol</PNOUsername>
+		<PNOPassword>Bismillah.7</PNOPassword>
+		<Xs4AllURL>https://service.xs4all.nl/</Xs4AllURL>
+		<Xs4AllUsername>rozsa</Xs4AllUsername>
+		<Xs4AllPassword>Bismi!!ah7</Xs4AllPassword>
+		<VerizonURL>https://www.verizonwireless.com/my-verizon/</VerizonURL>
+		<VerizonUsername>7022837101</VerizonUsername>
+		<VerizonPassword>Bismi!!ah1!</VerizonPassword>
+		<VerizonInfo>
+			*611 Customer Support
+			*86 + 6990 Voice Mail
+			*71 + 10-digit-number Forward if no answer
+			*72 + 10-digit-number Call Forwarding
+			    *72 702 534 6440 (forwarded 12/25/2016)
+			*73 End Call Forwarding
+		</VerizonInfo>
+		<VikingURL>http://vikingdirect.nl</VikingURL>
+		<VikingUsername>richard_rozsa@hotmail.com</VikingUsername>
+		<VikingPassword>Bismillah7</VikingPassword>
+		<VikingInfo>
+			Viking nr.: 3490147
+			Viking Code:
+		</VikingInfo>
+		<AerDataMailURL>https://webmail.universalmail.nl/owa</AerDataMailURL>
+		<EquiomMailURL>https://secure.equiom.com/exchange</EquiomMailURL>
+		<RozsaNetMailURL>https://email.secureserver.net</RozsaNetMailURL>
+		<HotMailURL>http://www.hotmail.com</HotMailURL>
+
+		<AlphenseMoslimJongerenURL>http://groups.yahoo.com/group/alphensemoslimjongeren/messages?o=1</AlphenseMoslimJongerenURL>
+		<AskANinjaURL>http://www.askaninja.com/</AskANinjaURL>
+    		<CalvinAndHobbesURL>http://www.ucomics.com/calvinandhobbes</CalvinAndHobbesURL>
+    		<DailySudokuURL>http://www.dailysudoku.com/sudoku/play.shtml?today=1</DailySudokuURL>
+    		<DilbertURL>http://www.dilbert.com/strips/</DilbertURL>
+    		<FacebookURL>http://www.facebook.com</FacebookURL>
+		<TheDailyShowURL>http://www.thedailyshow.com/full-episodes</TheDailyShowURL>
+		<TopTalURL>http://www.toptal.com</TopTalURL>
+    		<RoseIsRoseURL>http://www.gocomics.com/roseisrose</RoseIsRoseURL>
+    		<UserFriendlyURL>http://www.userfriendly.org/</UserFriendlyURL>
+    		<WoningnetURL>https://www.woningnetregiomiddenholland.nl/</WoningnetURL>
+    		<XkcdURL>http://xkcd.com/</XkcdURL>
+		<JerrySeinfeldURL>http://jerryseinfeld.com/</JerrySeinfeldURL>
+		<ComediansInCarsDrinkingCoffeeURL>http://comediansincarsgettingcoffee.com/</ComediansInCarsDrinkingCoffeeURL>
+
+		<Coornhert>http://www.coornhert-gymnasium.nl</Coornhert>
+		<Coornhert-SomToday>https://www.somtoday.nl/coornh/login</Coornhert-SomToday>
+		<Coornhert-SomToday-Username>richard_rozsa@hotmail.com</Coornhert-SomToday-Username>
+		<Coornhert-SomToday-Password>wegNYRSonEivbGrp</Coornhert-SomToday-Password>
+		<Coornhert-Rahima>http://www.coornhert-gymnasium.nl/rooster/dagrooster/bodyob.htm</Coornhert-Rahima>
+		<Coornhert-Nuriel>http://www.coornhert-gymnasium.nl/rooster/dagrooster/bodybb.htm</Coornhert-Nuriel>
+		<Coornhert-Nuriel-Specific>http://www.coornhert-gymnasium.nl/rooster/rooster/klas%204/Lee1_1889.htm</Coornhert-Nuriel-Specific>
+		<Coornhert-Schooltijden>http://www.coornhert-gymnasium.nl/vademecum/41/Organisatie.html#Rooster</Coornhert-Schooltijden>
+		<Coornhert-Contact>http://www.coornhert-gymnasium.nl/Contact.html</Coornhert-Contact>
+	</Urls>
+	<ShowUpdatedSites>
+		<UpdatedSiteCacheDir>
+			D:\Temp\UpdatedSiteCacheDir
+		</UpdatedSiteCacheDir>
+		<ShowUpdatedSite1>http://www.rozsa.net/family/robert</ShowUpdatedSite1>
+		<ShowUpdatedSite2></ShowUpdatedSite2>
+		<ShowUpdatedSite3></ShowUpdatedSite3>
+	</ShowUpdatedSites>
+	<RuneEscape>
+		<Url1>http://www.runescape.com/game.ws?m=1&amp;j=1</Url1>
+		<Url2>http://www.lunagang.nl/quest/elemental-workshop-2.php</Url2>
+		<Url3></Url3>
+	</RuneEscape>
+	<NetworkPaths>
+		<EMailMessageRename>
+			{Projects}\EMailMessageRename ? {EMailMessageRenameDelivery}
+
+		</EMailMessageRename>
+		<EMailMessageRenameDelivery>
+			{Install_Server}\Applications\E-Mail Message Rename
+		</EMailMessageRenameDelivery>
+	</NetworkPaths>
+	<LocalPaths>
+		<AIM_Reports>
+			{AML}\Reports\AIM
+		</AIM_Reports>
+		<Bin>
+			D:\Bin
+		</Bin>
+		<BackupDir>
+			{MyDocuments}\Backup
+		</BackupDir>
+		<GoDir>
+			{Projects}\GO
+		</GoDir>
+		<Projects>
+			D:\Projects
+		</Projects>
+		<Temp>
+			D:\Temp
+		</Temp>
+
+
+		<ClearQuest>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Rational Software\ClearQuest\2002.05.00\Install\DATADIR} || C:\Program Files\Rational\ClearQuest}
+		</ClearQuest>
+		<EMC>
+			{%EMCDEBUGTARGET% || {AML}}
+		</EMC>
+		<EMCDEBUGDIR>
+			{EMC}
+		</EMCDEBUGDIR>
+		<InetPub>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\InetStp\PathWWWRoot} || {{HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ContentIndex\Catalogs\Web\Location}\wwwroot || C:\Inetpub\wwwroot}}
+		</InetPub>
+		<MSOffice>
+			{MSOffice11}
+		</MSOffice>
+		<MSOffice8>
+			{HKEY_CURRENT_USER\Software\Microsoft\Office\8.0\Word\Options\PROGRAMDIR}
+		</MSOffice8>
+		<MSOffice9>
+			{{HKEY_CURRENT_USER\Software\Microsoft\Office\9.0\Word\Options\PROGRAMDIR} || {MSOffice8}}
+		</MSOffice9>
+		<MSOffice10>
+			{{HKEY_CURRENT_USER\Software\Microsoft\Office\10.0\Word\Options\PROGRAMDIR} || {MSOffice9}}
+		</MSOffice10>
+		<MSOffice11>
+			{{HKEY_CURRENT_USER\Software\Microsoft\Office\11.0\Word\Options\PROGRAMDIR} || {MSOffice10}}
+		</MSOffice11>
+		<MyDocuments>
+			{HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal}
+		</MyDocuments>
+		<ProgramFiles>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\InetStp\ProgramFilesPath} || C:\Program Files}
+		</ProgramFiles>
+		<System32>
+			{Windows}\System32
+		</System32>
+		<VisioDir>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\visio.exe\Path} || C:\Program Files\Microsoft Office\Visio11}
+		</VisioDir>
+		<VS>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft Integration\04E753AE-B2B4-4936-8DA2-4BDE702139FF\SuiteLocation} || {ProgramFiles}\Microsoft Visual Studio .NET 2003}
+		</VS>
+		<Windows>
+			%windir%
+		</Windows>
+		<WinZipDir>
+			{{HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Winzip\InstallLocation} || C:\Program Files\WinZip}
+		</WinZipDir>
+	</LocalPaths>
+</Go>
