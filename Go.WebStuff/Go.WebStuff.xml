@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--										-->
+<!-- Go Directory Alias table							-->
+<!--										-->
+<!-- Example: <MyToken>E:\SomeDirectory</MyToken>				-->
+<!--										-->
+<!-- Tokens can be used in directory values nested as deep as you like		-->
+<!-- by including the token name in curly braces {MyToken}:			-->
+<!--   <MyDrive>E:</MyDrive>							-->
+<!--   <MyDir>{MyDrive}\SomeDirectory</MyDir>					-->
+<!--										-->
+<!-- Registry values can be extracted by refering to the path as an alias:	-->
+<!--   <MyDocuments>{HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal}</MyDocuments> -->
+<!--										-->
+<!-- Environment variables can be extracted by using %VAR% syntax:		-->
+<!--   <Windows>%WinDir%</Windows>						-->
+<!--										-->
+<!-- An alternate path can be specified when the base path is not available:	-->
+<!--   <N_Server>{N: || {BackupDir}}</N_Server>					-->
+<!-- In the example above, N_Server will expand to N: unless it's not available	-->
+<!-- in which case it will expand to {BackupDir} which will further expand if	-->
+<!-- defined.									-->
+<!--										-->
+<!-- Multiple directories can be included in one alias. An explorer window will	-->
+<!-- be opened for each path separated by a question mark (?):					-->
+<!--   <ProgramFiles>C:\Program Files ? D:\Program Files ? E:\Program Files</ProgramFiles>	-->
+<!--										-->
+<Go>
+	<LocationsAndValues>
+		<Sections>
+			<Section>
+				<Title>WebStuff</Title>
+				<Items>
+					<Item>
+						<Name>DefaultUser</Name>
+						<Path>RR</Path>
+					</Item>
+					<!-- User -->
+					<Item>
+						<Name>Initials</Name>
+						<Path>RR</Path>
+					</Item>
+					<Item>
+						<Name>PictureImportDir</Name>
+						<Path>C:\Users\Richard\Pictures\Import</Path>
+					</Item>
+					<Item>
+						<Name>PictureNewDir</Name>
+						<Path>C:\Users\Richard\Pictures\Archive\New</Path>
+					</Item>
+					<Item>
+						<Name>PictureArchiveDir</Name>
+						<Path>C:\Users\Richard\Pictures\Archive</Path>
+					</Item>
+					<Item>
+						<Name>WebsitePhotoPageDir</Name>
+						<Path>C:\Projects\_WebSites\www.rozsa.net\family\richard</Path>
+					</Item>
+					<Item>
+						<Name>ArchiveSubDirectoryFormat</Name>
+						<Path><!--{0:yyyy}\\[{0:mm}] {0:mmm}\\{0:yyyy-mm-dd}--></Path>
+					</Item>
+					<!-- User -->
+				</Items>
+			</Section>
+		</Sections>
+	</LocationsAndValues>
+</Go>

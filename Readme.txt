@@ -1,4 +1,4 @@
-GO - Directory Navagation Utility
+GO - Automation Tool
 Revision History
 
 Version	Date		Author
@@ -35,3 +35,6 @@ v3.4	1994-01-25	Richard Rozsa
   This fix allows dos variables to be referrenced by aliases.
 v3.5	1995-05-23	Richard Rozsa
 - No longer upper case strings. Preserve typed or alias file case.
+v4.0	2022-08-23	Richard Rozsa
+- Conversion from C source to C#.
+  Lots of intermediary versions were lost.  This is the latest snapshot.

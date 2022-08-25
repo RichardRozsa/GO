@@ -1,0 +1,82 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go", "Go.csproj", "{DBCE862F-582A-4B5B-BE9F-8943EC38C743}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E} = {A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}
+		{6976BF28-811A-420E-A4FE-973FD5E09F21} = {6976BF28-811A-420E-A4FE-973FD5E09F21}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Tools", "Go.Tools\Go.Tools.csproj", "{6976BF28-811A-420E-A4FE-973FD5E09F21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Organization", "Go.Organization\Go.Organization.csproj", "{3864F4F7-22BC-4FF5-85DF-088F70E253DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6976BF28-811A-420E-A4FE-973FD5E09F21} = {6976BF28-811A-420E-A4FE-973FD5E09F21}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Framework", "Go.Framework\Go.Framework.csproj", "{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F706610F-726A-45E8-9DC2-2700DCCC9DB6} = {F706610F-726A-45E8-9DC2-2700DCCC9DB6}
+		{6976BF28-811A-420E-A4FE-973FD5E09F21} = {6976BF28-811A-420E-A4FE-973FD5E09F21}
+		{448B51C1-8054-40A6-A7E2-43E02D011EBE} = {448B51C1-8054-40A6-A7E2-43E02D011EBE}
+		{3864F4F7-22BC-4FF5-85DF-088F70E253DD} = {3864F4F7-22BC-4FF5-85DF-088F70E253DD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Group", "Go.Group\Go.Group.csproj", "{F706610F-726A-45E8-9DC2-2700DCCC9DB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6976BF28-811A-420E-A4FE-973FD5E09F21} = {6976BF28-811A-420E-A4FE-973FD5E09F21}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Individual", "Go.Individual\Go.Individual.csproj", "{448B51C1-8054-40A6-A7E2-43E02D011EBE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6976BF28-811A-420E-A4FE-973FD5E09F21} = {6976BF28-811A-420E-A4FE-973FD5E09F21}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.WebStuff", "Go.WebStuff\Go.WebStuff.csproj", "{8C821C7E-71F4-45D4-9053-B0C290E3FAA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Configuration", "Go.Configuration\Go.Configuration.csproj", "{F989CA07-D2CD-486B-AC79-CC5D3F7681F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBCE862F-582A-4B5B-BE9F-8943EC38C743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBCE862F-582A-4B5B-BE9F-8943EC38C743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBCE862F-582A-4B5B-BE9F-8943EC38C743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBCE862F-582A-4B5B-BE9F-8943EC38C743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6976BF28-811A-420E-A4FE-973FD5E09F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6976BF28-811A-420E-A4FE-973FD5E09F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6976BF28-811A-420E-A4FE-973FD5E09F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6976BF28-811A-420E-A4FE-973FD5E09F21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3864F4F7-22BC-4FF5-85DF-088F70E253DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3864F4F7-22BC-4FF5-85DF-088F70E253DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3864F4F7-22BC-4FF5-85DF-088F70E253DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3864F4F7-22BC-4FF5-85DF-088F70E253DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E8DE1D-0DDB-402E-BAF7-343FBC31949E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F706610F-726A-45E8-9DC2-2700DCCC9DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F706610F-726A-45E8-9DC2-2700DCCC9DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F706610F-726A-45E8-9DC2-2700DCCC9DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F706610F-726A-45E8-9DC2-2700DCCC9DB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{448B51C1-8054-40A6-A7E2-43E02D011EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448B51C1-8054-40A6-A7E2-43E02D011EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448B51C1-8054-40A6-A7E2-43E02D011EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448B51C1-8054-40A6-A7E2-43E02D011EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C821C7E-71F4-45D4-9053-B0C290E3FAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C821C7E-71F4-45D4-9053-B0C290E3FAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C821C7E-71F4-45D4-9053-B0C290E3FAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C821C7E-71F4-45D4-9053-B0C290E3FAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F989CA07-D2CD-486B-AC79-CC5D3F7681F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F989CA07-D2CD-486B-AC79-CC5D3F7681F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F989CA07-D2CD-486B-AC79-CC5D3F7681F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F989CA07-D2CD-486B-AC79-CC5D3F7681F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

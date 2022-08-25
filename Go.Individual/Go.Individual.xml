@@ -1,0 +1,155 @@
+<!--										-->
+<!-- Go Directory Alias table							-->
+<!--										-->
+<!-- Example: <MyToken>E:\SomeDirectory</MyToken>				-->
+<!--										-->
+<!-- Tokens can be used in directory values nested as deep as you like		-->
+<!-- by including the token name in curly braces {MyToken}:			-->
+<!--   <MyDrive>E:</MyDrive>							-->
+<!--   <MyDir>{MyDrive}\SomeDirectory</MyDir>					-->
+<!--										-->
+<!-- Registry values can be extracted by referring to the path as an alias:	-->
+<!--   <MyDocuments>{HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal}</MyDocuments> -->
+<!--										-->
+<!-- Environment variables can be extracted by using %VAR% syntax:		-->
+<!--   <Windows>%WinDir%</Windows>						-->
+<!--										-->
+<!-- An alternate path can be specified when the base path is not available:	-->
+<!--   <N_Server>{N: || {BackupDir}}</N_Server>					-->
+<!-- In the example above, N_Server will expand to N: unless it's not available	-->
+<!-- in which case it will expand to {BackupDir} which will further expand if	-->
+<!-- defined.									-->
+<!--										-->
+<!-- Multiple directories can be included in one alias. An explorer window will	-->
+<!-- be opened for each path seperated by a question mark (?):					-->
+<!--   <ProgramFiles>C:\Program Files ? D:\Program Files ? E:\Program Files</ProgramFiles>	-->
+<!--										-->
+<Go>
+	<Programs>
+		<DownloadSearchParameters>
+			<TorrentProxy>https://pirate-proxy.club</TorrentProxy>
+			<TorrentUI>/search.php?q={0}&amp;cat=0</TorrentUI>
+			<TorrentAPI>/newapi/q.php?q={0}&amp;cat=0</TorrentAPI>
+			<TorrentNotFoundMessage>No results returned</TorrentNotFoundMessage>
+		</DownloadSearchParameters>
+		<SearchList>
+			<Program>
+				<!-- Daily TV -->
+				<SearchText>The Daily Show</SearchText>
+				<ImdbUrl>http://www.imdb.com/title/tt0115147/</ImdbUrl>
+				<Episodes>
+					<Episode>
+						<Status>Search</Status>
+						<ReleaseDate>2022-08-22</ReleaseDate>
+						<ReleaseDateFormatNumber>"{0:yyyy.MM.dd}"</ReleaseDateFormatNumber>
+					</Episode>
+					<Episode>
+						<Number>"2022.08.23"</Number>
+						<Status>Search</Status>
+						<ReleaseDate>2022-08-23</ReleaseDate>
+					</Episode>
+				</Episodes>
+			</Program>
+			<Program>
+				<SearchText>Better Call Saul</SearchText>
+				<ImdbUrl>https://www.imdb.com/title/tt3032476/</ImdbUrl>
+				<Episodes>
+					<Episode>
+						<Number>s06e14</Number>
+						<Status>Search</Status>
+						<ReleaseDate>2022-08-22</ReleaseDate>
+					</Episode>
+				</Episodes>
+			</Program>
+			<Program>
+				<SearchText>Fantastic Beasts The Secrets of Dumbledore</SearchText>
+				<ImdbUrl>https://www.imdb.com/title/tt4123432/</ImdbUrl>
+				<Episodes>
+					<Episode>
+						<Number>-CAM -HDCAM -Screen -CAMRip</Number>
+						<Status>Search</Status>
+						<ReleaseDate>2022-04-15</ReleaseDate>
+						<CheckPeriod>Monthly</CheckPeriod>
+					</Episode>
+				</Episodes>
+			</Program>
+		</SearchList>
+	</Programs>
+	<LocationsAndValues>
+		<Sections>
+			<Section>
+				<Title>Stuff</Title>
+				<Items>
+					<Item>
+						<Name>KvK</Name>
+						<Url>https://diensten.kvk.nl/tb/html/localresponse0?TAM_OP=login&amp;USERNAME=unauthenticated&amp;ERROR_CODE=0x00000000&amp;URL=%2Finloggen.html&amp;REFERER=http%3A%2F%2Fwww.kvk.nl%2Fuitgelogd%2F&amp;HOSTNAME=diensten.kvk.nl</Url>
+						<Username>your-user-number</Username>
+						<Password>your-password</Password>
+						<Info>
+							Any comments you like!
+						</Info>
+					</Item>
+					<Item>
+						<Name>KPN</Name>
+						<Url>https://www.kpn.com/zakelijk/inloggen-mijnkpn.htm</Url>
+						<Username>your-email</Username>
+						<Password>your-password</Password>
+					</Item>
+				</Items>
+			</Section>
+			<Section>
+				<Title>Daily</Title>
+				<Items>
+					<Item>
+						<Name>DailySudoku</Name>
+						<Url>http://www.dailysudoku.com/sudoku/play.shtml?today=1</Url>
+					</Item>
+					<Item>
+						<Name>TheRachelMaddowShow</Name>
+						<Url>http://www.msnbc.com/rachel-maddow-show</Url>
+					</Item>
+				</Items>
+			</Section>
+			<Section>
+				<Title>LocalPaths</Title>
+				<Items>
+					<Item>
+						<Name>Bin</Name>
+						<Path>D:\Bin</Path>
+					</Item>
+					<Item>
+						<Name>BackupDir</Name>
+						<Path>{MyDocuments}\Backup</Path>
+					</Item>
+					<Item>
+						<Name>ClearQuest</Name>
+						<Path>{{HKEY_LOCAL_MACHINE\SOFTWARE\Rational Software\ClearQuest\2002.05.00\Install\DATADIR} || C:\Program Files\Rational\ClearQuest}</Path>
+					</Item>
+					<Item>
+						<Name>MyDocuments</Name>
+						<Path>HKEY_CURRENT_USER\Software\Microsoft\Office\11.0\Word\Options\PROGRAMDIR</Path>
+					</Item>
+					<Item>
+						<Name>System32</Name>
+						<Path>{Windows}\System32</Path>
+					</Item>
+					<Item>
+						<Name>VirtualBox</Name>
+						<Path>C:\Program Files\Oracle\VirtualBox</Path>
+						<Info>
+						Resize A Virtual Hard Drive In VirtualBox
+						https://www.youtube.com/watch?v=44CVcaGAYEw
+
+						Resize A Virtual Hard Drive In VirtualBox...The Easy Way						
+						https://www.youtube.com/watch?v=acSzj-28sMI
+						</Info>
+					</Item>
+					<Item>
+						<Name>Windows</Name>
+						<Path>%windir%</Path>
+					</Item>
+				</Items>
+			</Section>
+		</Sections>
+	</LocationsAndValues>
+</Go>

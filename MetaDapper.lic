@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<license id="248bfcba-15bd-48a6-a7b5-7792cbe4dc84" expiration="9999-12-31T00:00:00.0000000" type="Standard" MachineName="ANY" RecordsRestrictionType="Unlimited" SupportedMajorVersion="4">
+  <name>Richard Rozsa</name>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>GcuwtQnCf53fHP+hbGHoBgBbtkw=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>L9hBUDS/2Ys3delRh0fXNiRw3FNIjnAJdCq01N2Dvn4/hxe1YdcWAdYwMENcZM8PRLBnVSXdamcFsCuQlJPl3IO9uytNrt0XKDby6yB8KTLd9x290iL7byC/VztHHG3riaaj1Gy8feDes9hl8orxaL86IihtxHJ8UggbeNQFQ/o4e7uoYhzy5EYY1cImwsRRdvozejtpz+dxdlOlfSa2xg7/4mNzL3GcQJYlfSdZdPXuL03mIsJM+msmtjsBHg11yuNUGjjQyEEmoGlJolXoRUPROKxQTTe7B3DsLPsn6NsS9749M6SlPkI+8M3MHIjF6DKBAVAuOctHJ/dCgPCMqg5sq2WHOdhpsMiJKFkYWt6BU99yf+1AVpEcTHqosw26rRmNpFxX7O9JNWlm/Om5D69ciwwEbgi/d5ihEMuuRCgXGW6N8czHsTO3WlNgrKp0fbjIT9yz82Wjd+DLUlV4RNy2LNwGQoEC7OEMLFNBJOCvWxHQgM3qQ0AkxF2v4QAPRnzVvVFCvY+I1HqRPkmao265id2Yq9SLY+htSOVtj1tMaL8s5AizpAPqXetmpAWwel//kH7fR77CEOTml2rX/pzweWf8gvd1S+yow8VcaV7hLtYwiGmyqH0n+l8qv1DIk8qyHwli/3/RE4HKjeyEZCghmwC29++SHGpjuOHbBhcudrqUAQWR/VbuILcSKl+AAoPaw+joKea4g/ny8lRPhDZuXT978AKZ3QuotajmDL3sYUD+5Rz3j3K1aIjfG+ij1ZJgoeEx3E4dS7nCeTvVnBQUlBoG9qaxlIqG7THSQQ6IHkGcZQfTThbI7lwWrT45vF2CfSey1ajzaukkQG7LhondfLY/eQy/X+oA0k9W8eo+XJhRu9rUK4yDI8xOkkvnolz+sDOXfXHLd4oo+LfwCckXHGX8SWHdUQLNVWXbhsPbp0kbOEAmOqNTwzBTXFwLIgOwj5RJ25T2j9Zhkzd2AmTgbcPg8+f9UrbUKqlt7fj5dNBydvrBGzQp/tBS3VGQxLUOj2NuxMPsqq3wu0Lz4Oko7+XpjZMkX3YGqkym1vtVJKy+Lx1AIehyNueRU6QOqxeeLNXcuJ6tzcGKD5gynYtXL9e5XWdciKHE2AAhPFkbsyFDpK2GgrXgnY6jaB9jnD3N/hk908TJVyYg1WcXSyI7LsWWalnUdszApJxNVO5VHIhgZkF1qI3cv0TCCSd6HqHgth7q5XEewFA+f3O1QEuj0CP2v5rjC3RThWKpxxuySVSYe7XMpsRghb8Spi6MLEeILRbCPUrqYhli9BcQEfKGIX0JyvDVoOfAgtDTAoEd+ZgOjSwJmBwXUY2sM3HyDlgILcxPcY0YHvvJ2aDc2WswMYseEb7wIKh1dfwwQLcd9RaJpX2V/JN+RLjzLVaPFERTMyZ+Wzmbtn6bIGsvdPOT3dzXVkMyCDrePe6kY3CXUdJiZusjPeC0VLJQdgYhFZoeLWgfD669hW8wtDotFqsNeyoaIrgLfnucS4rg+ZvnP48mmcwbOx3MnAvyfVBA+X7NgBvXeq1ecfVbGPFZ9h77KzzRtbvq+Qg3xbZIgPXMznvuT3XyCISyaCAszK3VnymJiku55VOTMQCRZ3TyGSWlE3yVKyrmL/kD2pU/pmM6E2yZ/f/fZU4THFhtVEigun1bOLxpDdEy3uT+OZZ927mRAf2tK02mZObvuuZq+do=</SignatureValue>
+  </Signature>
+</license>

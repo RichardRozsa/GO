@@ -1,0 +1,46 @@
+<!--										-->
+<!-- Go Directory Alias table							-->
+<!--										-->
+<!-- Example: <MyToken>E:\SomeDirectory</MyToken>				-->
+<!--										-->
+<!-- Tokens can be used in directory values nested as deep as you like		-->
+<!-- by including the token name in curly braces {MyToken}:			-->
+<!--   <MyDrive>E:</MyDrive>							-->
+<!--   <MyDir>{MyDrive}\SomeDirectory</MyDir>					-->
+<!--										-->
+<!-- Registry values can be extracted by refering to the path as an alias:	-->
+<!--   <MyDocuments>{HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal}</MyDocuments> -->
+<!--										-->
+<!-- Environment variables can be extracted by using %VAR% syntax:		-->
+<!--   <Windows>%WinDir%</Windows>						-->
+<!--										-->
+<!-- An alternate path can be specified when the base path is not available:	-->
+<!--   <N_Server>{N: || {BackupDir}}</N_Server>					-->
+<!-- In the example above, N_Server will expand to N: unless it's not available	-->
+<!-- in which case it will expand to {BackupDir} which will further expand if	-->
+<!-- defined.									-->
+<!--										-->
+<!-- Multiple directories can be included in one alias. An explorer window will	-->
+<!-- be opened for each path seperated by a question mark (?):					-->
+<!--   <ProgramFiles>C:\Program Files ? D:\Program Files ? E:\Program Files</ProgramFiles>	-->
+<!--										-->
+<Go>
+	<LocationsAndValues>
+		<Sections>
+			<Section>
+				<Title>GroupExample</Title>
+				<Items>
+					<Item>
+						<Name>Item1Example</Name>
+						<Url>http://example1url.com</Url>
+					</Item>
+					<Item>
+						<Name>Item2Example</Name>
+						<Url>http://example2url.com</Url>
+						<Info>Don't forget to turn on the VPN!</Info>
+					</Item>
+				</Items>
+			</Section>
+		</Sections>
+	</LocationsAndValues>
+</Go>
