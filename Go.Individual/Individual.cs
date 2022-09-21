@@ -477,39 +477,43 @@ namespace Go
             var found = showAll;
             if (!showAll)
             {
-                try
+				for (var tryCount = 0; tryCount < 20; tryCount++)
                 {
-                    var content = UrlTools.GetUrl(searchUrl);
+					try
+					{
+						var content = UrlTools.GetUrl(searchUrl);
 
-                    // Test for empty string.
-                    if (content.Length < 4)
-                    {
-                        pageNotFoundCount++;
-                        found = false;
-                    }
+						// Test for empty string.
+						if (content.Length < 4)
+						{
+							pageNotFoundCount++;
+							found = false;
+						}
 
-                    // Test for a 404 error.
-                    else if (content.Length > 4 && !content.StartsWith("2") && content[3] == ':')
-                    //else if (content.Contains("Page not found") && content.Contains("404"))
-                    {
-                        pageNotFoundCount++;
-                        found = false;
-                    }
+						// Test for a 404 error.
+						else if (content.Length > 4 && !content.StartsWith("2") && content[3] == ':')
+						//else if (content.Contains("Page not found") && content.Contains("404"))
+						{
+							pageNotFoundCount++;
+							found = false;
+						}
 
-                    else
-                    {
-						// Test for "Not Found" message(s) in content.
-                        if (!string.IsNullOrEmpty(notFoundString2))
-                            found = !(content.Contains(notFoundString1) || content.Contains(notFoundString2));
-                        else
-                            found = !content.Contains(notFoundString1);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    found = false;
-                }
-            }
+						else
+						{
+							// Test for "Not Found" message(s) in content.
+							if (!string.IsNullOrEmpty(notFoundString2))
+								found = !(content.Contains(notFoundString1) || content.Contains(notFoundString2));
+							else
+								found = !content.Contains(notFoundString1);
+							break;
+						}
+					}
+					catch (Exception ex)
+					{
+						found = false;
+					}
+				}
+			}
             if (!found)
             {
                 _progressEvent.OnProgress(pea.UpdateProgress(item, searchText, "None"));
